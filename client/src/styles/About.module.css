@@ -1,0 +1,60 @@
+body {
+  background-image: url("https://img.freepik.com/vector-gratis/conjunto-perro-pequeno-feliz-lindo-perrito-divertido-practicando-diferentes-actividades-cazando-jugando-comiendo-durmiendo_74855-10796.jpg?t=st=1655844975~exp=1655845575~hmac=b04f4e43bd96450d035f4c94e6777cbb046aff41a17fd1246b7bc6a83ffec519&w=826");
+  
+  }
+  .container {
+    height: 100vh;
+    width: 100%;
+    overflow: auto;
+    padding: 10px;
+  }
+  
+  .about {
+    background-color: gainsboro;
+    width: 60%;
+    height: 70%;
+    margin: auto;
+    border-radius: 15px;
+  }
+  
+  .btn {
+    width: 250%;
+    background-color: burlywood;
+    color: white;
+    font: 1vw 'Acme', sans-serif;
+    padding: 20px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: rgb(156, 130, 96);
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+  
+  .btnDiv {
+    display: flex;
+    margin-left: -12%;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .img {
+    margin: 2%;
+    padding: 1%;
+  }
+  
+  .img:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+  
+  .text {
+    font: 7.5vw/1.6 "Acme", sans-serif;
+    color: teal;
+    font-size: 20px;
+    padding: 2%;
+  }
+  

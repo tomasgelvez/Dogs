@@ -4,6 +4,7 @@ const { Dog, Temperament } = require("../db");
 const { API_KEY } = process.env;
 
 const router = Router();
+//Creamos una constante para traer la informacion de la api.
 const getApiInfo = async () => {
   try {
     const apiUrl = await axios.get(
@@ -36,9 +37,10 @@ const getApiInfo = async () => {
     console.log("ERROR IN getApiInfo", error);
   }
 };
-
+//Creamos una constante para traer la informacion de la bd.
 const getDbInfo = async () => {
   try {
+    //Buscamos en la tabla de perros incluyendo a los temperaments
     const perros = await Dog.findAll({
       include: Temperament,
     });
@@ -65,7 +67,7 @@ const getDbInfo = async () => {
     console.log("ERROR IN getDBInfo", error);
   }
 };
-
+//Declaramos una variable getAllDogs donde lo que hacemos es concatenar la informacion de la api + bd
 const getAllDogs = async () => {
   try {
     const apiInfo = await getApiInfo();
@@ -77,15 +79,9 @@ const getAllDogs = async () => {
   }
 };
 
-// - [X] __GET /dogs__:
-// - Obtener un listado de las razas de perro
-// - Debe devolver solo los datos necesarios para la ruta principal
-// - [X] __GET /dogs?name="..."__:
-// - Obtener un listado de las razas de perro que contengan la palabra ingresada como query parameter
-// - Si no existe ninguna raza de perro mostrar un mensaje adecuado
+//Busco el name a traves del req.params. ?=name="tomas"
+// Guardar en una variable todos los perros ( api + bd)
 
-// Obtener un listado de las razas de perro que contengan la palabra ingresada como query parameter
-// Si no existe ninguna raza de perro mostrar un mensaje adecuado
 router.get("/dogs", async (req, res) => {
   const { name } = req.params;
   let dogsTotal = await getAllDogs();
@@ -93,8 +89,7 @@ router.get("/dogs", async (req, res) => {
     let dogName = await dogsTotal.filter((el) =>
       el.name.toLowerCase().includes(name.toLowerCase())
     );
-
-    dogsName.length
+    dogName.length
       ? res.status(200).send(dogsName)
       : res.status(400).send("No existe el nombre");
   } else {
@@ -156,3 +151,5 @@ router.post("/dogs", async (req, res, next) => {
     next(error);
   }
 });
+
+module.exports = router;

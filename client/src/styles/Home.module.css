@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Lobster&display=swap');
+
+
+.conteiner {
+  background-image: url("https://img.freepik.com/vector-gratis/conjunto-perro-pequeno-feliz-lindo-perrito-divertido-practicando-diferentes-actividades-cazando-jugando-comiendo-durmiendo_74855-10796.jpg?t=st=1655844975~exp=1655845575~hmac=b04f4e43bd96450d035f4c94e6777cbb046aff41a17fd1246b7bc6a83ffec519&w=826");
+  height: 100vh;
+  width: 100%;
+  overflow: auto;
+}
+
+.title {
+  font: bold 7.5vw/1.6 "Acme", sans-serif;
+  color: rgb(56, 33, 33);
+  font-size: 20px;
+  letter-spacing: 5px;
+  text-shadow: -1px -1px 0px #f4511e, 3px 3px 0px gainsboro, 6px 6px 0px teal;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 350px);
+  gap: 50px;
+}
+
+.card {
+  width: 80%;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+.select {
+  width: 30%;
+  padding: 12px 20px;
+  margin: 8px 5px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font: lighter 1vw'Acme', sans-serif;
+  color: gray;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  width: 20%;
+  background-color: burlywood;
+  color: white;
+  padding: 10px 10px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font: 1vw 'Acme', sans-serif;
+}
+
+.btn:hover {
+  background-color: rgb(156, 130, 96);
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+
+.div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 180%;
+}
+
+.loading {
+
+  font: bold 7.5vw/1.6 "Acme", sans-serif;
+  color: white;
+  font-size: 50px;
+  letter-spacing: 5px;
+  text-shadow: -1px -1px 0px #f4511e, 3px 3px 0px gainsboro, 6px 6px 0px teal;
+}

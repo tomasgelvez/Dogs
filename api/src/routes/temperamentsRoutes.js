@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const axios = require("axios");
+const {  Temperament } = require("../db");
 
 const router = Router();
 
@@ -29,3 +30,5 @@ router.get("/temperaments", async (req, res) => {
     res.send("Error");
   }
 });
+
+module.exports = router;

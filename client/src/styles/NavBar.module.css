@@ -1,0 +1,28 @@
+.navbar {
+    background-color: gainsboro;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+    justify-items: center;
+    
+  }
+  
+  .text {
+    font: 1vw/1.6 'Acme', sans-serif;
+    color: teal;
+  }
+  .text:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+  
+  
+  
+  .img:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+  
