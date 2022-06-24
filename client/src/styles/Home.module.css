@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Acme&family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;1,300&family=Rubik:wght@500&display=swap');
 
 
 .conteiner {
-  background-image: url("https://img.freepik.com/vector-gratis/conjunto-perro-pequeno-feliz-lindo-perrito-divertido-practicando-diferentes-actividades-cazando-jugando-comiendo-durmiendo_74855-10796.jpg?t=st=1655844975~exp=1655845575~hmac=b04f4e43bd96450d035f4c94e6777cbb046aff41a17fd1246b7bc6a83ffec519&w=826");
+  background-image: url("https://thumbs.dreamstime.com/b/modelo-incons%C3%BAtil-de-las-huellas-animales-del-fondo-41469148.jpg");
   height: 100vh;
   width: 100%;
   overflow: auto;
@@ -90,4 +90,9 @@ a {
   font-size: 50px;
   letter-spacing: 5px;
   text-shadow: -1px -1px 0px #f4511e, 3px 3px 0px gainsboro, 6px 6px 0px teal;
+}
+
+
+.img{
+  height: 200px;
 }

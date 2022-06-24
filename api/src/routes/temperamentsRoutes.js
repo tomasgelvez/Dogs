@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const axios = require("axios");
-const {  Temperament } = require("../db");
+const { Temperament } = require("../db");
 
 const router = Router();
 

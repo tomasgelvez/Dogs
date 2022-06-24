@@ -6,7 +6,7 @@ const initialState = {
     detail: []
 }   
 
-function rootReducer (state= initialState, action){
+function reducer (state= initialState, action){
     switch(action.type) {
         case "GET_DOGS":
             return{
@@ -15,7 +15,7 @@ function rootReducer (state= initialState, action){
                 allDogs: action.payload
         };
 
-        case "GET_TEMPERAMENTS":
+         case "GET_TEMPERAMENTS":
             return {
                 ...state,
                 temperaments: action.payload
@@ -25,13 +25,6 @@ function rootReducer (state= initialState, action){
                 ...state,
                 detail: action.payload
         };
-
-        case "GET_CLEAN":
-            return {
-                ...state,
-                detail: action.payload
-        };
-
         case "SEARCH_DOGS":
             return{
                 ...state,
@@ -95,10 +88,10 @@ function rootReducer (state= initialState, action){
             return {
                 ...state,
                 dogs: temperamentsFilter
-            }
+            } 
         default : 
             return {...state}
     }
 
 }
-export default rootReducer;
+export default reducer;

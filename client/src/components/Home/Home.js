@@ -8,11 +8,11 @@ import {
   orderByWeight,
   getTemperaments,
   filterTemperament,
-} from "../../actions";
+} from "../../store/actions/dogsAction.js";
 import { Link } from "react-router-dom";
-// import Card from "./card";
+import Card from "../Card/Card.js";
 import s from "../../styles/Home.module.css";
-// import Paginated from "./paginated";
+ import Paginated from "../Paginado/Paginado.js";
 import NavBar from "../NavBar/NavBar.js";
 
 export default function Home() {
@@ -87,7 +87,7 @@ export default function Home() {
       <div>
         <div className={s.row}>
           <select className={s.select} onChange={(e) => handleSort(e)}>
-            <option value="" disabled selected>
+            <option value="" disabled >
               Alphabetical order
             </option>
             <option value="asc">A-Z</option>
@@ -95,7 +95,7 @@ export default function Home() {
           </select>
 
           <select className={s.select} onChange={(e) => handleSortWeight(e)}>
-            <option value="" disabled selected>
+            <option value="" disabled >
               Order by weight
             </option>
             <option value="weightasc">Heavier</option>
@@ -107,7 +107,7 @@ export default function Home() {
             className={s.select}
             onChange={(e) => handleFilterByTemperament(e)}
           >
-            <option value="" disabled selected>
+            <option value="" disabled >
               Filter by temperament
             </option>
             <option value="all">All</option>
@@ -118,7 +118,7 @@ export default function Home() {
             ))}
           </select>
           <select className={s.select} onChange={(e) => handleFilterCreated(e)}>
-            <option value="" disabled selected>
+            <option value="" disabled >
               Filter by create
             </option>
             <option value="all">All</option>
@@ -129,16 +129,16 @@ export default function Home() {
           </select>
         </div>
 
+      </div>
         <button className={s.btn} onClick={(e) => handleClick(e)}>
           Reload dogs
         </button>
-      </div>
-      {/* <Paginated
+      <Paginated
         dogsPerPage={dogsPerPage}
         allDogs={allDogs.length}
         currentPage={currentPage}
         paginado={paginado}
-      /> */}
+      /> 
       <div className={s.card}>
         <ul className={s.grid}>
           {" "}
@@ -146,17 +146,19 @@ export default function Home() {
             <div className={s.div}>
               <p className={s.loading}>Loading...</p>
               <img
+              className={s.img}
+                
                 src={
-                  "https://i0.wp.com/thumbs.gfycat.com/ThankfulPlushAtlanticspadefish-max-1mb.gif"
+                  "https://i0.wp.com/c.tenor.com/7ZItpi-9Mr0AAAAC/perrito-adorable.gif"
                 }
               />
             </div>
           ) : (
             currentDogs.map((d) => {
               return (
-                <div className={s.card}>
+                <div className={s.card} key={d.id}>
                   <Link to={`/home/${d.id}`}>
-                    {/* <Card
+                    <Card
                       className={s.card}
                       name={d.name}
                       img={
@@ -167,13 +169,19 @@ export default function Home() {
                       temperament={d.temperament}
                       weight_max={d.weight_max}
                       weight_min={d.weight_min}
-                    /> */}
+                    /> 
                   </Link>
                 </div>
               );
             })
           )}
         </ul>
+        <Paginated
+        dogsPerPage={dogsPerPage}
+        allDogs={allDogs.length}
+        currentPage={currentPage}
+        paginado={paginado}
+      /> 
       </div>
     </div>
   );

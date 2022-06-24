@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { searchDogs } from "../../actions";
+import { searchDogs } from "../../store/actions/dogsAction.js";
 import s from '../../styles/SearchBar.module.css';
 
 

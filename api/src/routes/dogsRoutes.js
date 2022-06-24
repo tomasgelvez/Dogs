@@ -3,33 +3,49 @@ const axios = require("axios");
 const { Dog, Temperament } = require("../db");
 const { API_KEY } = process.env;
 
+// Importar todos los routers;
+// Ejemplo: const authRouter = require('./auth.js');
 const router = Router();
-//Creamos una constante para traer la informacion de la api.
+
+// Configurar los routers
+// Ejemplo: router.use('/auth', authRouter);
+
+//------------------------------GET---------------------------
+
+//traer la informacion desde la api
 const getApiInfo = async () => {
   try {
     const apiUrl = await axios.get(
-      `https://api.thedogapi.com/v1/breeds?api_key=2e35bf4e-3642-44e2-9dca-8edf8708f500`
+      `https://api.thedogapi.com/v1/breeds?api_key=232bd982-32a3-43b7-a1e4-bbcb2bdf72bc`
     );
     const apiInfo = await apiUrl.data.map((e) => {
       return {
-        //Son todos los valores.
         name: e.name,
         id: e.id,
-        height_max:
-          e.height.metric.split(" - ")[0] && e.height.metric.split(" - ")[0],
         height_min:
+          e.height.metric.split(" - ")[0] && e.height.metric.split(" - ")[0],
+
+        height_max:
           e.height.metric.split(" - ")[1] && e.height.metric.split(" - ")[1],
-        weight_max:
-          e.weight.metric.split(" - ")[1] && e.weight.metric.split(" - ")[1],
+
         weight_min:
           e.weight.metric.split(" - ")[0] !== "NaN"
             ? e.weight.metric.split(" - ")[0]
             : 6,
+
+        weight_max:
+          e.weight.metric.split(" - ")[1] && e.weight.metric.split(" - ")[1],
+
         life_time_min:
           e.life_span.split(" - ")[0] && e.life_span.split(" - ")[0],
+
         life_time_max:
           e.life_span.split(" - ")[1] &&
           e.life_span.split(" - ")[1].split(" ")[0],
+
+        temperament: e.temperament ? e.temperament : "Unknown",
+
+        image: e.image.url,
       };
     });
     return apiInfo;
@@ -37,61 +53,61 @@ const getApiInfo = async () => {
     console.log("ERROR IN getApiInfo", error);
   }
 };
-//Creamos una constante para traer la informacion de la bd.
-const getDbInfo = async () => {
+//traer la informacion desde la db
+const getDBinfo = async () => {
   try {
-    //Buscamos en la tabla de perros incluyendo a los temperaments
     const perros = await Dog.findAll({
       include: Temperament,
     });
 
     const info = perros.map((e) => {
-      let temp = Temperament.map((e) => e.name);
+      let temp = e.temperaments.map((e) => e.name);
       let aux = temp.join(", ");
+      // console.log("ACA ESTOY", e.temperament)
       return {
-        //Devuelvo toda la data creada db.
         name: e.name,
         id: e.id,
-        weight_max: e.weight_max,
-        weight_min: e.weight_min,
+        userCreated: e.userCreated,
         height_max: e.height_max,
         height_min: e.height_min,
+        weight_max: e.weight_max,
+        weight_min: e.weight_min,
         life_time_max: e.life_time_max,
         life_time_min: e.life_time_min,
         temperament: aux,
-        image: e.image,
+        image: e.image
+          ? e.image
+          : "https://pm1.narvii.com/6893/724dede9a107e0d420269799b4efe8be26a88df9r1-842-1024v2_00.jpg",
       };
     });
+    //console.log(info)
     return info;
   } catch (error) {
     console.log("ERROR IN getDBInfo", error);
   }
 };
-//Declaramos una variable getAllDogs donde lo que hacemos es concatenar la informacion de la api + bd
+//concateno ambas fuentes de informacion
 const getAllDogs = async () => {
   try {
     const apiInfo = await getApiInfo();
-    const dbInfo = await getDbInfo();
-    const infoFinal = apiInfo.concat(dbInfo);
-    return infoFinal;
+    const dbInfo = await getDBinfo();
+    const infoTotal = apiInfo.concat(dbInfo);
+    return infoTotal;
   } catch (error) {
-    console.log("Error en function getAllDogs", error);
+    console.log("ERROR IN infoTotal", error);
   }
 };
 
-//Busco el name a traves del req.params. ?=name="tomas"
-// Guardar en una variable todos los perros ( api + bd)
-
 router.get("/dogs", async (req, res) => {
-  const { name } = req.params;
+  const name = req.query.name;
   let dogsTotal = await getAllDogs();
   if (name) {
     let dogName = await dogsTotal.filter((el) =>
       el.name.toLowerCase().includes(name.toLowerCase())
     );
     dogName.length
-      ? res.status(200).send(dogsName)
-      : res.status(400).send("No existe el nombre");
+      ? res.status(200).send(dogName)
+      : res.status(400).send("No se encontro el perro que estas buscando");
   } else {
     res.status(200).send(dogsTotal);
   }
@@ -99,7 +115,7 @@ router.get("/dogs", async (req, res) => {
 
 router.get("/dogs/:id", async (req, res, next) => {
   try {
-    const dogBd = [];
+    let dogBd = [];
     const id = req.params.id;
     if (typeof id === "string" && id.length > 6) {
       dogBd = await Dog.findAll({ where: { id: id }, include: Temperament });
@@ -108,11 +124,14 @@ router.get("/dogs/:id", async (req, res, next) => {
       res.send(dogBd);
     } else {
       const dogsTotal = await getAllDogs();
-      const dogId = dogsTotal.filter((el) => el.id === id);
+      //console.log(dogsTotal);
+      let dogId = dogsTotal.filter((el) => el.id == id);
+      // console.log("id",  dogId)
+      // console.log("db",  dogBd)
       if (dogId) {
         res.send(dogId);
       } else {
-        res.send("El perro no existe.");
+        res.send("Doggie not found!");
       }
     }
   } catch (error) {
@@ -122,28 +141,27 @@ router.get("/dogs/:id", async (req, res, next) => {
 
 router.post("/dogs", async (req, res, next) => {
   try {
-    const {
+    let {
       name,
-      temperament,
-      weight_max,
-      weight_min,
-      height_max,
       height_min,
-      life_time_max,
+      height_max,
+      weight_min,
+      weight_max,
       life_time_min,
+      life_time_max,
       image,
+      temperament,
     } = req.body;
 
     const newDog = await Dog.create({
       name,
-      temperament,
-      weight_max,
-      weight_min,
-      height_max,
       height_min,
-      life_time_max,
+      height_max,
+      weight_min,
+      weight_max,
       life_time_min,
-      image,
+      life_time_max,
+      image
     });
     newDog.addTemperament(temperament);
     res.status(201).json(newDog);

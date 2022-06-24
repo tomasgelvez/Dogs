@@ -1,35 +1,37 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import s from "../../styles/NavBar.module.css";
 import SearchBar from "../SearchBar/SearchBar.js";
 import home from "../../img/dog.png";
+import icons from "../../img/menu.svg";
 
 export default function NavBar() {
   return (
     <header>
-      <div className={s.navbar}>
-        <NavLink to="/">
-          <img className={s.img}
-            src={home}
-            id="landingpage"
-            width="60"
-            height="60"
-            alt="img not found"
-          />
-        </NavLink>
-        <NavLink to="/home">
-          <p className={s.text}>Home</p>
-        </NavLink>
-        <NavLink to="/post">
-          <p className={s.text}>Create your dog</p>
-        </NavLink>
+      <nav className={s.nav}>
+        <div className={s.nav__container}>
+          <Link to="/">
+            <img className={s.nav__logo} src={home} alt="" />
+          </Link>
+          <SearchBar></SearchBar>
+          <label for="menu" className={s.nav__label}>
+            <img src={icons} alt="" />
+          </label>
+          <input type="checkbox" id="menu" className={s.nav__input} />
 
-        <NavLink to="/about">
-          <p className={s.text}>About</p>
-        </NavLink>
-
-     <SearchBar></SearchBar> 
-      </div>
+          <div className={s.nav__menu}>
+            <Link to="/home">
+              <p className={s.nav__item}>Home</p>
+            </Link>
+            <Link to="/post">
+              <p className={s.nav__item}>Create your dog</p>
+            </Link>
+            <Link to="/about">
+              <p className={s.nav__item}>About</p>
+            </Link>
+          </div>
+        </div>
+      </nav>
     </header>
   );
 }

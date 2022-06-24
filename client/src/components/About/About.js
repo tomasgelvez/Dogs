@@ -16,7 +16,7 @@ export default function About() {
       <div className={s.about}>
         <h1 className={s.text}>Hola a todos!</h1>
         <h3 className={s.text}>
-          Soy Tomás, desarrollador Full Stack Developer! <br />
+          Soy Tomás Gelvez, desarrollador Full Stack Developer! <br />
           Hice esta pagina como proyecto individual de Soy Henry Bootcamp{" "}
           <br />
         </h3>

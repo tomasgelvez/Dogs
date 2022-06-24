@@ -1,4 +1,4 @@
-import React from 'react'
+ import React from 'react'
 import {Link} from 'react-router-dom';
 import s from '../../styles/LadingPage.module.css'
 import Modal from '../Modal/Modal.js';
@@ -27,4 +27,4 @@ function LadingPage() {
   )
 }
 
-export default LadingPage
+export default LadingPage 

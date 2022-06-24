@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getClean, getDetail } from "../../actions";
+import { getDetail } from "../../store/actions/dogsAction.js";
 import { useEffect } from "react";
-// import s from "../styles/dogDetail.module.css";
+import s from "../../styles/dogDetail.module.css";
 
 export default function DogDetail() {
   const myDog = useSelector((state) => state.detail);
@@ -11,40 +11,39 @@ export default function DogDetail() {
 
   const { id } = useParams();
 
-  //console.log(id)
 
   useEffect(() => {
     dispatch(getDetail(id));
-    dispatch(getClean());
   }, [dispatch, id]);
   console.log(myDog);
 
   return (
-    <div>
+    <div className={s.contiener}>
       <Link to="/home">
-        <button>Back to Home</button>
+        <button className={s.btn}>Back to Home</button>
       </Link>
 
       {myDog.length > 0 ? (
-        <div>
-          <div>
+        <div className={s.card} key={id}>
+          <div className={s.edit}>
             <div>
               {myDog[0].userCreated ? (
                 <Link to="/delete/:id">
-                  <button>Delete!</button>
+                  <button className={s.bn}>Delete!</button>
                 </Link>
               ) : null}
             </div>
             <div>
               {myDog[0].userCreated ? (
                 <Link to="/edit/:id">
-                  <button>Edit!</button>
+                  <button className={s.bn}>Edit!</button>
                 </Link>
               ) : null}
             </div>
           </div>
-          <h1>{myDog[0].name}</h1>
+          <h1 className={s.title}>{myDog[0].name}</h1>
           <img
+            className={s.img}
             alt="img not found"
             src={
               myDog[0].image
@@ -52,7 +51,7 @@ export default function DogDetail() {
                 : "https://pm1.narvii.com/6893/724dede9a107e0d420269799b4efe8be26a88df9r1-842-1024v2_00.jpg"
             }
           />
-          <p>
+          <p className={s.text}>
             {!myDog[0].life_time_max
               ? `Their life span is approximately ${myDog[0].life_time_min}.`
               : `Their life span is between ${myDog[0].life_time_min} and ${myDog[0].life_time_max} years.`}{" "}
@@ -72,12 +71,11 @@ export default function DogDetail() {
         </div>
       ) : (
         <div>
-          <p>Loading...</p>
+          <p className={s.loading}>Loading...</p>
           <img
             src={
               "https://i0.wp.com/thumbs.gfycat.com/ThankfulPlushAtlanticspadefish-max-1mb.gif"
             }
-            alt="imagen"
           />
         </div>
       )}
