@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from 'sweetalert';
 export const GET_DOGS = "GET_DOGS";
 
 export function getDogs() {
@@ -43,16 +44,18 @@ export function searchDogs(search) {
           payload: dogs.data,
         });
       })
-
       .catch(() => {
-        alert("Doggie not found!");
+        swal({
+          title: "Ups ocurrio un error",
+          text: "El perro que intentas buscar no existe",
+          icon: "warning",
+        });
       });
   };
 }
 export function postDog(payload) {
   return async function (dispatch) {
     const response = await axios.post("/post", payload);
-    //console.log("soy", response.temperament[1])
     return response;
   };
 }

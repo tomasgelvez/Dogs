@@ -15,8 +15,6 @@ export default function DogDetail() {
   useEffect(() => {
     dispatch(getDetail(id));
   }, [dispatch, id]);
-  console.log(myDog);
-
   return (
     <div className={s.contiener}>
       <Link to="/home">
@@ -25,22 +23,7 @@ export default function DogDetail() {
 
       {myDog.length > 0 ? (
         <div className={s.card} key={id}>
-          <div className={s.edit}>
-            <div>
-              {myDog[0].userCreated ? (
-                <Link to="/delete/:id">
-                  <button className={s.bn}>Delete!</button>
-                </Link>
-              ) : null}
-            </div>
-            <div>
-              {myDog[0].userCreated ? (
-                <Link to="/edit/:id">
-                  <button className={s.bn}>Edit!</button>
-                </Link>
-              ) : null}
-            </div>
-          </div>
+         
           <h1 className={s.title}>{myDog[0].name}</h1>
           <img
             className={s.img}

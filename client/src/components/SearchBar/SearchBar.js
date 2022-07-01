@@ -18,9 +18,6 @@ function onSubmit(e) {
 function onInputChange(e) {
     e.preventDefault();
     setSearch(e.target.value)
-    
-    console.log(search)
-
 }
     return (
         <div className={s.nav}>

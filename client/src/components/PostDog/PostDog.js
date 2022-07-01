@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import swal from "sweetalert";
 import { postDog, getTemperaments } from "../../store/actions/dogsAction.js";
 import s from "../../styles/postDog.module.css";
 
@@ -12,50 +13,50 @@ function validate(input) {
 
 
   if (!input.name || !/^[A-Z]+[A-Za-z0-9\s]+$/g.test(input.name)){
-    errors.name = "❌ The first letter must be uppercase";
+    errors.name = "❌ La primera letra debe estar en mayúscula";
 } else {
-  errors.name = "✅Done!"
+  errors.name = "✅Done!";
 }
 
 if(!input.height_min || !/^[1-9]\d*(\.\d+)?$/.test(input.height_min)){
     errors.height_min = '❌ Only numbers';
 }else {
-  errors.height_min = "✅Done!"
+  errors.height_min = "✅Done!";
 }
 if(!input.height_max || !/^[1-9]\d*(\.\d+)?$/.test(input.height_max)){
-    errors.height_max = '❌ Only numbers';
+    errors.height_max = '❌ Solo numeros';
 } else {
-  errors.height_max = "✅Done!"
+  errors.height_max = "✅Done!";
 }
 if(input.height_max <= input.height_min){
-    errors.height_min = '❌ Min value cannot be greater than the max';
+    errors.height_min = '❌ El valor mínimo no puede ser mayor que el máximo';
 }
 
 if(!input.weight_min || !/^[1-9]\d*(\.\d+)?$/.test(input.weight_min)){
-    errors.weight_min = '❌ Only numbers';
+    errors.weight_min = '❌ Solo numeros';
 }
 if(!input.weight_max || !/^[1-9]\d*(\.\d+)?$/.test(input.weight_max)){
-    errors.weight_max = '❌ Only numbers';
+    errors.weight_max = '❌ Solo numeros';
 }
 if(input.weight_max <= input.weight_min){
-    errors.weight_min = '❌ Min value cannot be greater than the max';
+    errors.weight_min = '❌ El valor mínimo no puede ser mayor que el máximo';
 }
 if(!input.life_time_min || !/^[1-9]\d*(\.\d+)?$/.test(input.life_time_min)){
-    errors.life_time_min = '❌ Only numbers';
+    errors.life_time_min = '❌ Solo numeros';
 }
 if(!input.life_time_max || !/^[1-9]\d*(\.\d+)?$/.test(input.life_time_max)){
-errors.life_time_max = '❌ Only numbers';
+errors.life_time_max = '❌ Solo numeros';
 }
 if(input.life_time_max <= input.life_time_min){
-    errors.life_time_min = '❌ Min value cannot be greater than the max';
+    errors.life_time_min = '❌ El valor mínimo no puede ser mayor que el máximo';
 }
 if (input.img && !/[a-z0-9-.]+\.[a-z]{2,4}\/?([^\s<>#%",{}\\|^[\]`]+)?$/.test(input.img) ){
-    errors.img = '❌ Must be an URL or be empty';
+    errors.img = '❌ Debe ser una URL o estar vacio.';
 }
 if (input.temperament.length <= 2){
-    errors.temperament = "❌ The dog can't have more than three temperaments!";
+    errors.temperament = "❌ El perro no puede tener más de tres temperamentos.!";
 }
-return errors
+return errors;
 }
 
 
@@ -79,10 +80,7 @@ export default function PostDog() {
     img: "",
   });
 
-  //console.log(temperaments)
-
-  //al estado input ademas de lo que tiene le agrega el e.target.value de lo que este modificando
-  //va llenando el estado que planteamos arriba
+ 
   function handleChange(e) {
     setInput({
       ...input,
@@ -95,12 +93,14 @@ export default function PostDog() {
         [e.target.name]: e.target.name,
       })
     );
-    //console.log(input)
   }
 
   function handleSelect(e) {
     if (input.temperament.length === 3) {
-      alert("The dog can't have more than three temperaments!");
+      swal({
+        text: "¡El perro no puede tener más de tres temperamentos!",
+        icon: "warning",
+      });
     } else if (input.temperament.length < 3) {
       setInput({
         ...input,
@@ -114,12 +114,10 @@ export default function PostDog() {
       ...input,
       temperament: input.temperament.filter((e) => e !== el),
     });
-    console.log(input);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    // console.log(input)
     if (
       
       input.name !== "" &&
@@ -132,7 +130,11 @@ export default function PostDog() {
       input.temperament.length !== 0
     ){
       dispatch(postDog(input));
-    alert("Done!");
+      swal({
+        title: "Buen trabajo!",
+        text: "El perro fue creado con exito",
+        icon: "success",
+      });
     setInput({
       name: "",
       height_min: "",
@@ -144,9 +146,12 @@ export default function PostDog() {
       image: "",
       temperaments: [],
     });
-    history.push("/home")
+    history.push("/home");
     } else {
-        alert("Required elements are missing!")
+      swal({
+        title: "¡Faltan los elementos necesarios!",
+        icon: "warning",
+      });
     };
   }
 
@@ -159,8 +164,9 @@ export default function PostDog() {
       <Link to="/home">
         <button className={s.btn}> Back to home</button>
       </Link>
-      <h1 className={s.title}>Crea a tu nuevo perro!</h1>
+      <div className={s.containerFormsAndErrors}>
       <form className={s.form} onSubmit={(e) => handleSubmit(e)}>
+      <h1 className={s.title}>Crea a tu nuevo perro!</h1>
         <p className={s.obligatorio}>* : Requerido</p>
         {/*--------INPUTS-------------------------------------------------------*/}
         {/*--------raza---------------------------------------------------------*/}
@@ -333,6 +339,7 @@ export default function PostDog() {
         </button>
       </form>
       <div className={s.danger}>
+        <h3 className={s.titleDangers}>Debes cumplir con los siguientes requisitos:</h3>
         {errors.name && <p className={s.error}>{errors.name}</p>}
         {errors.height_min && <p className={s.error}>{errors.height_min}</p>}
         {errors.height_max && <p className={s.error}>{errors.height_max}</p>}
@@ -344,6 +351,7 @@ export default function PostDog() {
         {errors.life_time_max && (
           <p className={s.error}>{errors.life_time_max}</p>
         )}
+      </div>
       </div>
     </div>
   );

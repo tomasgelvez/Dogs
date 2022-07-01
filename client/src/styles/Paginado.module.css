@@ -6,9 +6,10 @@
     padding: 20px;
     align-items: center;
     justify-content: center;
+    margin-bottom: 60px;
   }
   .number {
-    background-color: burlywood;
+    background-color: rgb(201, 110, 20);
     color: rgb(255, 255, 255);
     list-style: none;
     display: flex;
@@ -22,7 +23,7 @@
   }
   
   .number:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
     cursor: pointer;
   }
   
@@ -46,7 +47,7 @@
     height: 30px;
     border-radius: 10px;
     position: relative;
-    background: rgb(156, 130, 96);
+    background: rgba(170, 136, 91, 0.74);
   }
   
   .img::before {
@@ -64,7 +65,7 @@
   }
   
   .nav {
-    width: 70%;
+    width: 80%;
     margin: auto;
   }
   

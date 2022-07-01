@@ -72,7 +72,6 @@ function reducer (state= initialState, action){
             const createdFilter = action.payload === 'created' ? 
             allDogsCreated.filter(el => el.userCreated)
             : allDogsCreated.filter(el => !el.userCreated)
-            //console.log(allDogs)
             return {
                 ...state,
                 dogs: action.payload === "all" ? allDogsCreated : createdFilter
@@ -84,7 +83,6 @@ function reducer (state= initialState, action){
             allDogs : allDogs.filter(el => {
                 return el.temperament?.split(", ").includes(action.payload)
             })
-            //console.log(temperamentsFilter)
             return {
                 ...state,
                 dogs: temperamentsFilter

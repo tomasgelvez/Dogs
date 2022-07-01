@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Acme&family=Lobster&display=swap');
 
 .conteiner {
-  background-image: url("https://img.freepik.com/vector-gratis/conjunto-perro-pequeno-feliz-lindo-perrito-divertido-practicando-diferentes-actividades-cazando-jugando-comiendo-durmiendo_74855-10796.jpg?t=st=1655844975~exp=1655845575~hmac=b04f4e43bd96450d035f4c94e6777cbb046aff41a17fd1246b7bc6a83ffec519&w=826");
+  background-image: url("https://thumbs.dreamstime.com/b/modelo-incons%C3%BAtil-de-las-huellas-animales-del-fondo-41469148.jpg");
   height: 100vh;
   width: 100%;
   overflow: auto;
@@ -15,18 +15,18 @@
   color: white;
   font-size: 50px;
   letter-spacing: 5px;
-  text-shadow: -1px -1px 0px #f4511e, 3px 3px 0px gainsboro, 6px 6px 0px teal;
 }
 
 
 .coso {
   display: flex;
   flex-direction: row;
+  justify-content:space-around;
   width: 100%;
 }
 
 .form {
-  background-color: white;
+  background-color: rgb(192, 113, 10);
   border-radius: 15px;
   width: 45%;
   margin: auto;
@@ -42,10 +42,13 @@
 
 .label, .labell {
   display: flex;
-  align-items: flex-start;
-  align-self: flex-start;
+  flex-direction: column;
   margin: 30px 0 0 20px;
   padding: auto;
+  font: bold 7.5vw/1.6 "Acme", sans-serif;
+  color: white;
+  font-size: 20px;
+  letter-spacing: 5px;
 }
 
 .row {
@@ -54,10 +57,11 @@
 }
 
 .input{
-  width: 50%;
+  width: 80%;
   margin: 10px 0 20px 20px;
   box-sizing: border-box;
   border: none;
+  padding: 10px;
   border-bottom: 2px solid gainsboro;
   outline: none;
 }
@@ -74,8 +78,9 @@
 
 .inputl{
   width: 80%;
-  margin: 10px 0 10px 20px;
+  margin: 10px 0 10px 40px;
   box-sizing: border-box;
+  padding: 10px;
   border: none;
   border-bottom: 2px solid gainsboro;
   outline: none;
@@ -101,7 +106,7 @@
   color: white;
   font: 1vw 'Acme', sans-serif;
   padding: 20px 20px;
-  margin: 8px 8px;
+  margin: 20px 8px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -135,7 +140,8 @@
 .error {
   display: flex;
   flex-direction: row;
-  font: 1vw 'Acme', sans-serif;
+  font: 'Acme', sans-serif;
+  font-size: 20px;
   color: rgb(230, 230, 230);
   margin-left: 4%;
 }
@@ -145,10 +151,21 @@
   justify-content: space-between;
   justify-items:stretch;
   border-radius: 10%;
-  padding: -20px;
+  width: 40%;
+    height: 240px;
+  padding-top: 7px;
+  position: sticky;
+  top: 10%;
+}
+
+.titleDangers{
+  color: #a84501;
+}
+.containerFormsAndErrors{
+  display: flex;
+}
+
+/* padding: -20px;
   margin-left: 75%;
   margin-top: -31%;
-  margin-bottom: 70%;
-  width: 350px;
-  height: auto;
-}
+  margin-bottom: 70%; */

@@ -14,7 +14,7 @@ export default function NavBar() {
             <img className={s.nav__logo} src={home} alt="" />
           </Link>
           <SearchBar></SearchBar>
-          <label for="menu" className={s.nav__label}>
+          <label htmlFor="menu" className={s.nav__label}>
             <img src={icons} alt="" />
           </label>
           <input type="checkbox" id="menu" className={s.nav__input} />

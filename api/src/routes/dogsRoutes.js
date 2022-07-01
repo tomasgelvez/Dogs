@@ -124,14 +124,12 @@ router.get("/dogs/:id", async (req, res, next) => {
       res.send(dogBd);
     } else {
       const dogsTotal = await getAllDogs();
-      //console.log(dogsTotal);
       let dogId = dogsTotal.filter((el) => el.id == id);
-      // console.log("id",  dogId)
-      // console.log("db",  dogBd)
+      
       if (dogId) {
         res.send(dogId);
       } else {
-        res.send("Doggie not found!");
+        res.send("El perro buscado no existe");
       }
     }
   } catch (error) {

@@ -12,7 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import Card from "../Card/Card.js";
 import s from "../../styles/Home.module.css";
- import Paginated from "../Paginado/Paginado.js";
+import Paginated from "../Paginado/Paginado.js";
 import NavBar from "../NavBar/NavBar.js";
 
 export default function Home() {
@@ -80,108 +80,116 @@ export default function Home() {
 
   return (
     <div className={s.conteiner}>
-       <NavBar />
+      <NavBar />
       <div className={s.title}>
         <h1>El mundo de los Perros</h1>
       </div>
-      <div>
-        <div className={s.row}>
-          <select className={s.select} onChange={(e) => handleSort(e)}>
-            <option value="" disabled >
-              Alphabetical order
-            </option>
-            <option value="asc">A-Z</option>
-            <option value="desc">Z-A</option>
-          </select>
 
-          <select className={s.select} onChange={(e) => handleSortWeight(e)}>
-            <option value="" disabled >
-              Order by weight
-            </option>
-            <option value="weightasc">Heavier</option>
-            <option value="weightdesc">Lighter</option>
-          </select>
-        </div>
-        <div className={s.row2}>
-          <select
-            className={s.select}
-            onChange={(e) => handleFilterByTemperament(e)}
-          >
-            <option value="" disabled >
-              Filter by temperament
-            </option>
-            <option value="all">All</option>
-            {allTemperaments.map((temp) => (
-              <option key={temp.id} value={temp.name}>
-                {temp.name}
-              </option>
-            ))}
-          </select>
-          <select className={s.select} onChange={(e) => handleFilterCreated(e)}>
-            <option value="" disabled >
-              Filter by create
-            </option>
-            <option value="all">All</option>
-            <option option value="api">
-              By API
-            </option>
-            <option value="created">By database</option>
-          </select>
-        </div>
-
-      </div>
-        <button className={s.btn} onClick={(e) => handleClick(e)}>
-          Reload dogs
-        </button>
       <Paginated
         dogsPerPage={dogsPerPage}
         allDogs={allDogs.length}
         currentPage={currentPage}
         paginado={paginado}
-      /> 
-      <div className={s.card}>
-        <ul className={s.grid}>
-          {" "}
-          {!currentDogs.length > 0 ? (
-            <div className={s.div}>
-              <p className={s.loading}>Loading...</p>
-              <img
-              className={s.img}
-                
-                src={
-                  "https://i0.wp.com/c.tenor.com/7ZItpi-9Mr0AAAAC/perrito-adorable.gif"
-                }
-              />
+      />
+      <div className={s.containerFilters}>
+        <div>
+          <div className={s.containerSelects}>
+            <h3 className={s.title2}>BUSCA SEGUN:</h3>
+            <span className={s.title2}>Orden Alfabetico</span>
+            <div className={s.row}>
+              <select className={s.select} onChange={(e) => handleSort(e)}>
+                <option value="asc">A-Z</option>
+                <option value="desc">Z-A</option>
+              </select>
             </div>
-          ) : (
-            currentDogs.map((d) => {
-              return (
-                <div className={s.card} key={d.id}>
-                  <Link to={`/home/${d.id}`}>
-                    <Card
-                      className={s.card}
-                      name={d.name}
-                      img={
-                        d.image
-                          ? d.image
-                          : "https://pm1.narvii.com/6893/724dede9a107e0d420269799b4efe8be26a88df9r1-842-1024v2_00.jpg"
-                      }
-                      temperament={d.temperament}
-                      weight_max={d.weight_max}
-                      weight_min={d.weight_min}
-                    /> 
-                  </Link>
-                </div>
-              );
-            })
-          )}
-        </ul>
+            <span className={s.title2}>PESO DEL PERRO</span>
+            <div className={s.row}>
+              <select
+                className={s.select}
+                onChange={(e) => handleSortWeight(e)}
+              >
+                <option value="weightasc">Pesado</option>
+                <option value="weightdesc">Liviano</option>
+              </select>
+            </div>
+            <span className={s.title2}>TEMPERAMENTO</span>
+            <div className={s.row2}>
+              <select
+                className={s.select}
+                onChange={(e) => handleFilterByTemperament(e)}
+              >
+                <option value="all">All</option>
+                {allTemperaments.map((temp) => (
+                  <option key={temp.id} value={temp.name}>
+                    {temp.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <span className={s.title2}>CREACION</span>
+            <div className={s.row2}>
+              <select
+                className={s.select}
+                onChange={(e) => handleFilterCreated(e)}
+              >
+                <option value="all">All</option>
+                <option option value="api">
+                  By API
+                </option>
+                <option value="created">By database</option>
+              </select>
+            </div>
+            <button className={s.btn} onClick={(e) => handleClick(e)}>
+              Reload dogs
+            </button>
+          </div>
+        </div>
+        <div className={s.card}>
+          <ul className={s.grid}>
+            {" "}
+            {!currentDogs.length > 0 ? (
+              <div className={s.div}>
+                <p className={s.loading}>Loading...</p>
+                <img
+                  className={s.img}
+                  src={
+                    "https://i0.wp.com/c.tenor.com/7ZItpi-9Mr0AAAAC/perrito-adorable.gif"
+                  }
+                  alt="#"
+                />
+              </div>
+            ) : (
+              currentDogs.map((d) => {
+                return (
+                  <div className={s.card} key={d.id}>
+                    <Link to={`/home/${d.id}`}>
+                      <Card
+                        className={s.card}
+                        name={d.name}
+                        img={
+                          d.image
+                            ? d.image
+                            : "https://pm1.narvii.com/6893/724dede9a107e0d420269799b4efe8be26a88df9r1-842-1024v2_00.jpg"
+                        }
+                        temperament={d.temperament}
+                        weight_max={d.weight_max}
+                        weight_min={d.weight_min}
+                      />
+                    </Link>
+                  </div>
+                );
+              })
+            )}
+          </ul>
+        </div>
+      </div>
+      <div style={{ "margin-top": "40px" }}>
         <Paginated
-        dogsPerPage={dogsPerPage}
-        allDogs={allDogs.length}
-        currentPage={currentPage}
-        paginado={paginado}
-      /> 
+          dogsPerPage={dogsPerPage}
+          allDogs={allDogs.length}
+          currentPage={currentPage}
+          paginado={paginado}
+        />
       </div>
     </div>
   );

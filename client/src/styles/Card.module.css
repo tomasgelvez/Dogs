@@ -2,7 +2,7 @@
 
 
 .conteiner{
-    background-color: #76b7a7;
+    background: #5a1f06ad;
     margin: 5px;
     padding: 10px;
     width: 370px;
@@ -17,14 +17,14 @@
 
 .conteiner:hover {
 border-radius: 12px;
-background: gainsboro;
+background: rgb(192, 113, 10);
 box-shadow:  12px 12px 21px #acacac,
              -12px -12px 21px #ffffff;
 }
 
 .name {
-    font: 2vw/1.6 'Acme', sans-serif;
-    color: teal;
+    font: bold "Acme", sans-serif;
+  color: white;
     text-decoration: none;
 }
 
@@ -33,7 +33,6 @@ box-shadow:  12px 12px 21px #acacac,
 }
 
 .temp, .peso {
-    font: 1vw/1.6 'Acme', sans-serif;
-    font-style: italic;
-    color: teal;
+    font: bold "Acme", sans-serif;
+  color: white;
 }
