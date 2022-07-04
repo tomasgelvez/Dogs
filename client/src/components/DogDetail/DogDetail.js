@@ -54,12 +54,7 @@ export default function DogDetail() {
         </div>
       ) : (
         <div>
-          <p className={s.loading}>Loading...</p>
-          <img
-            src={
-              "https://i0.wp.com/thumbs.gfycat.com/ThankfulPlushAtlanticspadefish-max-1mb.gif"
-            }
-          />
+          <p className={s.loading}>LOADING...</p>
         </div>
       )}
     </div>

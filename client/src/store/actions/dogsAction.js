@@ -1,5 +1,4 @@
 import axios from "axios";
-import swal from 'sweetalert';
 export const GET_DOGS = "GET_DOGS";
 
 export function getDogs() {
@@ -45,11 +44,7 @@ export function searchDogs(search) {
         });
       })
       .catch(() => {
-        swal({
-          title: "Ups ocurrio un error",
-          text: "El perro que intentas buscar no existe",
-          icon: "warning",
-        });
+        alert("El perro que intentas buscar no existe")
       });
   };
 }

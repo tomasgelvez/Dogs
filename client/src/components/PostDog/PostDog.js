@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import swal from "sweetalert";
 import { postDog, getTemperaments } from "../../store/actions/dogsAction.js";
 import s from "../../styles/postDog.module.css";
 
@@ -15,18 +14,18 @@ function validate(input) {
   if (!input.name || !/^[A-Z]+[A-Za-z0-9\s]+$/g.test(input.name)){
     errors.name = "❌ La primera letra debe estar en mayúscula";
 } else {
-  errors.name = "✅Done!";
+  errors.name = "✅Hecho!";
 }
 
 if(!input.height_min || !/^[1-9]\d*(\.\d+)?$/.test(input.height_min)){
     errors.height_min = '❌ Only numbers';
 }else {
-  errors.height_min = "✅Done!";
+  errors.height_min = "✅Hecho!";
 }
 if(!input.height_max || !/^[1-9]\d*(\.\d+)?$/.test(input.height_max)){
     errors.height_max = '❌ Solo numeros';
 } else {
-  errors.height_max = "✅Done!";
+  errors.height_max = "✅Hecho!";
 }
 if(input.height_max <= input.height_min){
     errors.height_min = '❌ El valor mínimo no puede ser mayor que el máximo';
@@ -97,10 +96,8 @@ export default function PostDog() {
 
   function handleSelect(e) {
     if (input.temperament.length === 3) {
-      swal({
-        text: "¡El perro no puede tener más de tres temperamentos!",
-        icon: "warning",
-      });
+      alert('¡El perro no puede tener más de tres temperamentos!')
+      
     } else if (input.temperament.length < 3) {
       setInput({
         ...input,
@@ -130,11 +127,8 @@ export default function PostDog() {
       input.temperament.length !== 0
     ){
       dispatch(postDog(input));
-      swal({
-        title: "Buen trabajo!",
-        text: "El perro fue creado con exito",
-        icon: "success",
-      });
+      alert("El perro fue creado con exito!")
+      
     setInput({
       name: "",
       height_min: "",
@@ -148,10 +142,8 @@ export default function PostDog() {
     });
     history.push("/home");
     } else {
-      swal({
-        title: "¡Faltan los elementos necesarios!",
-        icon: "warning",
-      });
+      alert("¡Faltan los elementos necesarios!")
+      
     };
   }
 

@@ -10,8 +10,9 @@
   .about {
     background-color: #f0e9de;
     width: 60%;
-    height: 70%;
+    height: 50%;
     margin: auto;
+    margin-top: 30px;
     border-radius: 15px;
   }
   

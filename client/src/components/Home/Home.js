@@ -95,7 +95,7 @@ export default function Home() {
         <div>
           <div className={s.containerSelects}>
             <h3 className={s.title2}>BUSCA SEGUN:</h3>
-            <span className={s.title2}>Orden Alfabetico</span>
+            <span className={s.title2}>ORDEN ALFABETICO</span>
             <div className={s.row}>
               <select className={s.select} onChange={(e) => handleSort(e)}>
                 <option value="asc">A-Z</option>
@@ -126,7 +126,7 @@ export default function Home() {
                 ))}
               </select>
             </div>
-            <span className={s.title2}>CREACION</span>
+            <span className={s.title2}>POR CREACION</span>
             <div className={s.row2}>
               <select
                 className={s.select}
@@ -150,13 +150,6 @@ export default function Home() {
             {!currentDogs.length > 0 ? (
               <div className={s.div}>
                 <p className={s.loading}>Loading...</p>
-                <img
-                  className={s.img}
-                  src={
-                    "https://i0.wp.com/c.tenor.com/7ZItpi-9Mr0AAAAC/perrito-adorable.gif"
-                  }
-                  alt="#"
-                />
               </div>
             ) : (
               currentDogs.map((d) => {
@@ -183,7 +176,7 @@ export default function Home() {
           </ul>
         </div>
       </div>
-      <div style={{ "margin-top": "40px" }}>
+      <div className={s.paginated}>
         <Paginated
           dogsPerPage={dogsPerPage}
           allDogs={allDogs.length}

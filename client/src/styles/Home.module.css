@@ -6,6 +6,7 @@
   height: 100vh;
   width: 100%;
   overflow: auto;
+  overflow-x: hidden;
 }
 
 .title {
@@ -27,6 +28,7 @@
   justify-content: center;
   text-align: center;
   margin: auto;
+  margin-left: 40px;
 }
 
 .containerFilters{
@@ -113,7 +115,9 @@ a {
   text-shadow: -1px -1px 0px #f4511e, 3px 3px 0px gainsboro, 6px 6px 0px teal;
 }
 
-
+.paginated{
+  margin-top: 40px; 
+}
 .img{
   height: 200px;
 }

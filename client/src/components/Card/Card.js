@@ -10,6 +10,7 @@ export default function Card({
   weight_max,
 }) {
   return (
+    
     <div className={s.conteiner} key={id}>
       <h2 className={s.name}>{name}</h2>
       <img
