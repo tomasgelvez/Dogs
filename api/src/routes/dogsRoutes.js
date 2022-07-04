@@ -137,7 +137,7 @@ router.get("/dogs/:id", async (req, res, next) => {
   }
 });
 
-router.post("/dogs", async (req, res, next) => {
+router.post("/post", async (req, res, next) => {
   try {
     let {
       name,
