@@ -43,15 +43,15 @@ if(input.weight_max <= input.weight_min){
 if(!input.life_time_min || !/^[1-9]\d*(\.\d+)?$/.test(input.life_time_min)){
     errors.life_time_min = '❌ Solo numeros';
 }
-if(!input.life_time_max || !/^[1-9]\d*(\.\d+)?$/.test(input.life_time_max)){
+/* if(!input.life_time_max || !/^[1-9]\d*(\.\d+)?$/.test(input.life_time_max)){
 errors.life_time_max = '❌ Solo numeros';
-}
+} */
 if(input.life_time_max <= input.life_time_min){
     errors.life_time_min = '❌ El valor mínimo no puede ser mayor que el máximo';
 }
-if (input.img && !/[a-z0-9-.]+\.[a-z]{2,4}\/?([^\s<>#%",{}\\|^[\]`]+)?$/.test(input.img) ){
+ if (input.img && !/[a-z0-9-.]+\.[a-z]{2,4}\/?([^\s<>#%",{}\\|^[\]`]+)?$/.test(input.img) ){
     errors.img = '❌ Debe ser una URL o estar vacio.';
-}
+} 
 if (input.temperament.length <= 2){
     errors.temperament = "❌ El perro no puede tener más de tres temperamentos.!";
 }
@@ -85,7 +85,6 @@ export default function PostDog() {
       ...input,
       [e.target.name]: e.target.value,
     });
-    //console.log(input)
     setErrors(
       validate({
         ...input,
@@ -116,7 +115,6 @@ export default function PostDog() {
   function handleSubmit(e) {
     e.preventDefault();
     if (
-      
       input.name !== "" &&
       input.height_min !== "" &&
       input.height_max > input.height_min &&
@@ -128,22 +126,20 @@ export default function PostDog() {
     ){
       dispatch(postDog(input));
       alert("El perro fue creado con exito!")
-      
-    setInput({
-      name: "",
-      height_min: "",
-      height_max: "",
-      weight_min: "",
-      weight_max: "",
-      life_time_min: "",
-      life_time_max: "",
-      image: "",
-      temperaments: [],
-    });
-    history.push("/home");
+      setInput({
+        name: "",
+        height_min: "",
+        height_max: "",
+        weight_min: "",
+        weight_max: "",
+        life_time_min: "",
+        life_time_max: "",
+        image: "",
+        temperaments: [],
+      });
+      history.push("/home");
     } else {
       alert("¡Faltan los elementos necesarios!")
-      
     };
   }
 
@@ -160,9 +156,6 @@ export default function PostDog() {
       <form className={s.form} onSubmit={(e) => handleSubmit(e)}>
       <h1 className={s.title}>Crea a tu nuevo perro!</h1>
         <p className={s.obligatorio}>* : Requerido</p>
-        {/*--------INPUTS-------------------------------------------------------*/}
-        {/*--------raza---------------------------------------------------------*/}
-
         <div className={s.row}>
           <label className={s.labell}>*Raza:</label>
           <input
@@ -175,9 +168,6 @@ export default function PostDog() {
             placeholder="Coloca la raza..."
             onChange={(e) => handleChange(e)}
           />
-
-          {/* </div> */}
-          {/*--------tamaño-----------------------------------------------------------------*/}
           <div className={s.row}>
             <label className={s.label}>*Tamaño:</label>
             <br />
@@ -214,7 +204,6 @@ export default function PostDog() {
               </div>
             </div>
           </div>
-          {/*-------peso------------------------------------------------------------------*/}
           <div className={s.row}>
             <label className={s.label}>*Peso:</label>
             <br />
@@ -251,7 +240,6 @@ export default function PostDog() {
               </div>
             </div>
           </div>
-          {/*-------años-----------------------------------------------------------------*/}
           <div className={s.row}>
             <label className={s.label}>*Años de vida:</label>
             <br />
@@ -288,8 +276,7 @@ export default function PostDog() {
               </div>
             </div>
           </div>
-          {/*------imagen----------------------------------------------------------------*/}
-          {/* <div className={s.row}> */}
+         
           <label className={s.labell}>Imagen:</label>
           <input
             type="imagen"
@@ -299,9 +286,6 @@ export default function PostDog() {
             placeholder="URL"
             onChange={(e) => handleChange(e)}
           />
-          {/* </div> */}
-          {/*------temperamentos-----------------------------------------------------*/}
-          {/* <div className={s.row}> */}
           <label className={s.label}>*Temperaments:</label>
           <select className={s.select} onChange={(e) => handleSelect(e)}>
             {temperaments.map((temperament) => (
@@ -311,18 +295,17 @@ export default function PostDog() {
             ))}
           </select>
           <ul className={s.ul}>
-            <li className={s.li} key={"key"}>
               {input.temperament.map((el) => (
+            <li className={s.li} key={el}>
                 <button
                   className={s.botonTemp}
                   type="button"
-                  key={el.id}
                   onClick={() => handleDelete(el)}
                 >
                   {el}
                 </button>
-              ))}
             </li>
+              ))}
           </ul>
         </div>
 
