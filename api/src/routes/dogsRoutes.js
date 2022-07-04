@@ -77,7 +77,7 @@ const getDBinfo = async () => {
         temperament: aux,
         image: e.image
           ? e.image
-          : "https://pm1.narvii.com/6893/724dede9a107e0d420269799b4efe8be26a88df9r1-842-1024v2_00.jpg",
+          : "https://www.kienyke.com/sites/default/files/styles/amp_1200x675_16_9/public/2021-07/D%C3%ADa-Internacional-del-Perro-Callejero%20%281%29.jpg?itok=aAkFkVnj",
       };
     });
     //console.log(info)
