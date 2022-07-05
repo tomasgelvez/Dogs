@@ -81,10 +81,6 @@ export default function Home() {
   return (
     <div className={s.conteiner}>
       <NavBar />
-      <div className={s.title}>
-        <h1>El mundo de los Perros</h1>
-      </div>
-
       <Paginated
         dogsPerPage={dogsPerPage}
         allDogs={allDogs.length}
