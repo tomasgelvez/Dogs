@@ -43,9 +43,9 @@ if(input.weight_max <= input.weight_min){
 if(!input.life_time_min || !/^[1-9]\d*(\.\d+)?$/.test(input.life_time_min)){
     errors.life_time_min = '❌ Solo numeros';
 }
-/* if(!input.life_time_max || !/^[1-9]\d*(\.\d+)?$/.test(input.life_time_max)){
+ if(!input.life_time_max || !/^[1-9]\d*(\.\d+)?$/.test(input.life_time_max)){
 errors.life_time_max = '❌ Solo numeros';
-} */
+} 
 if(input.life_time_max <= input.life_time_min){
     errors.life_time_min = '❌ El valor mínimo no puede ser mayor que el máximo';
 }

@@ -98,6 +98,7 @@ const getAllDogs = async () => {
   }
 };
 
+
 router.get("/dogs", async (req, res) => {
   const name = req.query.name;
   let dogsTotal = await getAllDogs();
